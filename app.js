@@ -12,6 +12,7 @@ import citaRoutes from './routes/citaRoutes.js'
 import pacienteRoutes from './routes/pacienteRoutes.js'
 import usuarioRoutes from './routes/usuarioRoutes.js'
 import diagnosticoRoutes from './routes/diagnosticoRoutes.js'
+import prescripcionRoutes  from './routes/prescripcionRoutes.js'
 
 const app = express()
 
@@ -59,6 +60,8 @@ app.use('/usuarios', usuarioRoutes)
 //Ruta de diagnosticos
 app.use('/diagnosticos', diagnosticoRoutes)
 
+//Ruta de prescripciones
+app.use('/prescripciones', prescripcionRoutes)
 
 app.use(express.static(path.join(__dirname, 'public')))
 

@@ -1,0 +1,49 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Prescripciones
+
+    br
+
+    a(href="/prescripciones/crear") + Nueva Prescripción
+
+    br
+    br
+
+    table(border="1" cellpadding="10")
+
+        thead
+            tr
+                th Paciente
+                th Medicamento
+                th Dosis
+                th Frecuencia
+                th Duración
+                th Acciones
+
+        tbody
+
+            each prescripcion in prescripciones
+
+                tr
+
+                    td= prescripcion.diagnostico.cita.paciente.usuario.nombres + ' ' + prescripcion.diagnostico.cita.paciente.usuario.apellidos
+
+                    td= prescripcion.nombre_medicamento
+
+                    td= prescripcion.dosis
+
+                    td= prescripcion.frecuencia
+
+                    td= prescripcion.duracion
+
+                    td
+                        a(href=`/prescripciones/editar/${prescripcion.id_prescripcion}`) ✏️
+
+                        form(
+                            action=`/prescripciones/eliminar/${prescripcion.id_prescripcion}`
+                            method="POST"
+                            style="display:inline"
+                        )
+                            button(type="submit") 🗑️

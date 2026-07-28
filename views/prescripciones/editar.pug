@@ -1,0 +1,65 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Editar Prescripción
+
+    form(method="POST")
+
+        label Diagnóstico
+
+        select(name="diagnostico_id")
+
+            each diagnostico in diagnosticos
+
+                option(
+                    value=diagnostico.id_diagnostico
+                    selected=diagnostico.id_diagnostico === prescripcion.diagnostico_id
+                )
+                    = diagnostico.cita.paciente.usuario.nombres + ' ' + diagnostico.cita.paciente.usuario.apellidos
+
+        br
+        br
+
+        label Medicamento
+        input(
+            type="text"
+            name="nombre_medicamento"
+            value=prescripcion.nombre_medicamento
+            required
+        )
+
+        br
+
+        label Dosis
+        input(
+            type="text"
+            name="dosis"
+            value=prescripcion.dosis
+            required
+        )
+
+        br
+
+        label Frecuencia
+        input(
+            type="text"
+            name="frecuencia"
+            value=prescripcion.frecuencia
+            required
+        )
+
+        br
+
+        label Duración
+        input(
+            type="text"
+            name="duracion"
+            value=prescripcion.duracion
+            required
+        )
+
+        br
+        br
+
+        button(type="submit") Actualizar

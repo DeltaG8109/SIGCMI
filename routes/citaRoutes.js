@@ -8,7 +8,6 @@ import {
     guardarCita,
     formularioEditarCita,
     editarCita,
-    eliminarCita,
     formularioCancelarCita,
     cancelarCita
 } from '../controllers/citaController.js'
@@ -28,9 +27,6 @@ router.get('/editar/:id', protegerRuta, formularioEditarCita)
 
 // Guardar cambios
 router.post('/editar/:id', protegerRuta, editarCita)
-
-//Eliminar cita ruta
-router.post('/eliminar/:id', protegerRuta, eliminarCita)
 
 // Mostrar formulario de cancelación
 router.get('/cancelar/:id', protegerRuta, formularioCancelarCita)

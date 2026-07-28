@@ -518,26 +518,7 @@ const editarCita = async (req, res) => {
 
 }
 
-// ======================================
-// Eliminar cita
-// ======================================
-const eliminarCita = async (req, res) => {
 
-    const { id } = req.params
-
-    const cita = await Cita.findByPk(id)
-
-    if (!cita) {
-
-        return res.redirect('/citas')
-
-    }
-
-    await cita.destroy()
-
-    res.redirect('/citas')
-
-}
 
 // ======================================
 // Mostrar formulario para cancelar
@@ -730,8 +711,6 @@ export {
     formularioEditarCita,
 
     editarCita,
-
-    eliminarCita,
 
     formularioCancelarCita,
 

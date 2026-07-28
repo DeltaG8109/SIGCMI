@@ -3,6 +3,7 @@ import Medico from '../models/Medico.js'
 import Paciente from '../models/Paciente.js'
 import Cita from '../models/Cita.js'
 import EstadoCita from '../models/EstadoCita.js'
+import { Op } from 'sequelize'
 
 const dashboard = async (req, res) => {
 
@@ -78,6 +79,12 @@ const dashboard = async (req, res) => {
             day: 'numeric'
         })
 
+    const datosGraficoBarras = {
+        pendientes: citasPendientes,
+        completadas: citasCompletadas,
+        canceladas: citasCanceladas
+    }
+
     res.render('admin/dashboard', {
 
         pagina: 'Dashboard',
@@ -99,8 +106,10 @@ const dashboard = async (req, res) => {
         citasCanceladas,
 
         ultimasCitas,
-        
-        fechaActual
+
+        fechaActual,
+
+        datosGraficoBarras
 
     })
 

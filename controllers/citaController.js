@@ -4,6 +4,7 @@ import Paciente from '../models/Paciente.js'
 import Medico from '../models/Medico.js'
 import EstadoCita from '../models/EstadoCita.js'
 import Usuario from '../models/Usuario.js'
+import Especialidad from '../models/Especialidad.js'
 
 // ======================================
 // Mostrar todas las citas
@@ -32,10 +33,17 @@ const listarCitas = async (req, res) => {
                 as: 'medico',
 
                 include: [
+
                     {
                         model: Usuario,
                         as: 'usuario'
+                    },
+
+                    {
+                        model: Especialidad,
+                        as: 'especialidad'
                     }
+
                 ]
 
             },
@@ -699,6 +707,31 @@ const reprogramarCita = async (req, res) => {
 
 }
 
+// ======================================
+// Confirmar cita
+// ======================================
+
+const confirmarCita = async (req, res) => {
+
+    const { id } = req.params
+
+    const cita = await Cita.findByPk(id)
+
+    if (!cita) {
+        return res.redirect('/citas')
+    }
+
+    await cita.update({
+
+        estado_id: 2
+
+    })
+
+    res.redirect('/citas')
+
+}
+
+
 
 export {
 
@@ -718,6 +751,8 @@ export {
 
     formularioReprogramarCita,
 
-    reprogramarCita
+    reprogramarCita,
+
+    confirmarCita
 
 }

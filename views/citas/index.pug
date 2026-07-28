@@ -11,7 +11,7 @@ block contenido
     br
     br
 
-    table(border="1" cellpadding="10")
+    table(class="w-full border-collapse")
 
         thead
 
@@ -19,8 +19,10 @@ block contenido
 
                 th Paciente
                 th Médico
+                th Especialidad
                 th Fecha
                 th Hora
+                th Motivo
                 th Estado
                 th Acciones
 
@@ -30,27 +32,59 @@ block contenido
 
                 tr
 
-                    td= cita.paciente.usuario.nombres + ' ' + cita.paciente.usuario.apellidos
-
-                    td= cita.medico.usuario.nombres + ' ' + cita.medico.usuario.apellidos
-
-                    td= cita.fecha
-
-                    td= cita.hora
-
-                    td= cita.estado.nombre
+                    td
+                        = cita.paciente.usuario.nombres + ' ' + cita.paciente.usuario.apellidos
 
                     td
-    
-                        if cita.estado.nombre !== 'Cancelada'
-    
-                            a(href=`/citas/editar/${cita.id_cita}`) ✏️
-    
-                            a(href=`/citas/reprogramar/${cita.id_cita}`) 🔄
-    
-                            a(href=`/citas/cancelar/${cita.id_cita}`) ❌
-    
+                        = cita.medico.usuario.nombres + ' ' + cita.medico.usuario.apellidos
+
+                    td
+                        = cita.medico.especialidad.nombre
+
+                    td
+                        = cita.fecha
+
+                    td
+                        = cita.hora
+
+                    td
+                        = cita.motivo_consulta
+
+                    td
+
+                        if cita.estado.nombre === 'Pendiente'
+
+                            span(style="background:#FEF3C7;color:#92400E;padding:6px 12px;border-radius:20px;")
+                                = cita.estado.nombre
+
+                        else if cita.estado.nombre === 'Completada'
+
+                            span(style="background:#DCFCE7;color:#166534;padding:6px 12px;border-radius:20px;")
+                                = cita.estado.nombre
+
+                        else if cita.estado.nombre === 'Cancelada'
+
+                            span(style="background:#FEE2E2;color:#991B1B;padding:6px 12px;border-radius:20px;")
+                                = cita.estado.nombre
+
                         else
-    
-                            span(style="color:red;font-weight:bold;")
-                                |Cancelada
+
+                            span(style="background:#DBEAFE;color:#1E40AF;padding:6px 12px;border-radius:20px;")
+                                = cita.estado.nombre
+
+                    td
+                        if cita.estado.nombre === 'Pendiente'
+
+                            a(href=`/citas/confirmar/${cita.id_cita}` title="Confirmar") ✅
+
+                            |  
+
+                        a(href=`/citas/editar/${cita.id_cita}` title="Editar") ✏️
+
+                        |  
+
+                        a(href=`/citas/reprogramar/${cita.id_cita}` title="Reprogramar") 🔄
+
+                        |  
+
+                        a(href=`/citas/cancelar/${cita.id_cita}` title="Cancelar") ❌

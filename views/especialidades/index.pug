@@ -1,0 +1,45 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Especialidades
+    a.boton(href="/especialidades/crear") + Nueva Especialidad
+
+    br
+    br
+
+    table.tabla
+
+        thead
+            tr
+                th ID
+                th Nombre
+                th Descripción
+                th Acciones
+
+        tbody
+
+            each especialidad in especialidades
+
+                tr
+
+                    td= especialidad.id_especialidad
+
+                    td= especialidad.nombre
+
+                    td= especialidad.descripcion
+
+                    td
+
+                        a(href=`/especialidades/editar/${especialidad.id_especialidad}`) ✏️ Editar
+
+                        |   
+
+                        form(
+                            method="POST"
+                            action=`/especialidades/eliminar/${especialidad.id_especialidad}`
+                            style="display:inline"
+                        )
+
+                            button(type="submit")
+                                |🗑️ Eliminar

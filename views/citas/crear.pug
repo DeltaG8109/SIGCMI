@@ -1,0 +1,115 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Nueva Cita
+
+    if error
+
+        p(style="color:red;font-weight:bold;")
+            = error
+
+    form(method="POST")
+
+        // ==========================
+        // Paciente
+        // ==========================
+        div
+
+            label Paciente
+
+            select(name="paciente_id" required)
+
+                option(value="") -- Seleccione un paciente --
+
+                each paciente in pacientes
+
+                    option(value=paciente.id_paciente)
+
+                        = paciente.usuario.nombres + ' ' + paciente.usuario.apellidos
+
+        br
+
+        // ==========================
+        // Médico
+        // ==========================
+        div
+
+            label Médico
+
+            select(name="medico_id" required)
+
+                option(value="") -- Seleccione un médico --
+
+                each medico in medicos
+
+                    option(value=medico.id_medico)
+
+                        = medico.usuario.nombres + ' ' + medico.usuario.apellidos
+
+        br
+
+        // ==========================
+        // Estado
+        // ==========================
+        div
+
+            label Estado
+
+            select(name="estado_id" required)
+
+                each estado in estados
+
+                    option(value=estado.id_estado)
+
+                        = estado.nombre
+
+        br
+
+        // ==========================
+        // Fecha
+        // ==========================
+        div
+
+            label Fecha
+
+            input(
+                type="date"
+                name="fecha"
+                min=new Date().toISOString().split('T')[0]
+                required
+            )
+
+        br
+
+        // ==========================
+        // Hora
+        // ==========================
+        div
+
+            label Hora
+
+            input(
+                type="time"
+                name="hora"
+                required
+            )
+
+        br
+
+        // ==========================
+        // Motivo
+        // ==========================
+        div
+
+            label Motivo de consulta
+
+            textarea(
+                name="motivo_consulta"
+                rows="5"
+            )
+
+        br
+
+        button(type="submit")
+            Guardar Cita

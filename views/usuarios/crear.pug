@@ -1,0 +1,96 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Nuevo Usuario
+
+    form(method="POST")
+
+        div
+            label Nombres
+
+            input(
+                type="text"
+                name="nombres"
+                required
+            )
+
+        br
+
+        div
+            label Apellidos
+
+            input(
+                type="text"
+                name="apellidos"
+                required
+            )
+
+        br
+
+        div
+            label Correo
+
+            input(
+                type="email"
+                name="correo"
+                required
+            )
+
+        br
+
+        div
+            label Teléfono
+
+            input(
+                type="text"
+                name="telefono"
+            )
+
+        br
+
+        div
+            label Tipo Documento
+
+            input(
+                type="text"
+                name="tipo_documento"
+            )
+
+        br
+
+        div
+            label Número Documento
+
+            input(
+                type="text"
+                name="numero_documento"
+            )
+
+        br
+
+        div
+            label Rol
+
+            select(name="rol_id")
+
+                each rol in roles
+
+                    option(value=rol.id_rol)
+                        = rol.nombre
+
+        br
+
+        div
+            label Contraseña
+
+            input(
+                type="password"
+                name="password"
+                required
+            )
+
+        br
+
+        button(type="submit")
+            Guardar

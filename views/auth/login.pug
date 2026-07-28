@@ -1,0 +1,60 @@
+extends ../layout/main
+
+block contenido
+
+    .login-container
+
+        .login-card
+
+            .login-header
+
+                h1 SIGCMI
+
+                h2 Iniciar Sesión
+
+                p Sistema Integral de Gestión de Citas Médicas Inteligentes
+
+            if mensaje
+                .alerta
+                    = mensaje
+
+            form(method="POST" action="/auth/login")
+
+                .campo
+
+                    label(for="correo") Correo Electrónico
+
+                    input(
+                        type="email"
+                        id="correo"
+                        name="correo"
+                        placeholder="correo@ejemplo.com"
+                        required
+                    )
+
+                .campo
+
+                    label(for="password") Contraseña
+
+                    input(
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="********"
+                        required
+                    )
+
+                button.boton(type="submit")
+                    |Iniciar Sesión
+
+            .opciones
+
+                a(href="/auth/registro") ¿No tienes cuenta? Regístrate
+
+                br
+
+                a(href="/auth/olvide-password") ¿Olvidaste tu contraseña?
+
+        footer.footer
+
+            p © 2026 SIGCMI - Sistema Integral de Gestión de Citas Médicas Inteligentes

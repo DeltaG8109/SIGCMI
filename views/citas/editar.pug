@@ -1,0 +1,121 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Editar Cita
+
+    if error
+
+        p(style="color:red;font-weight:bold;")
+            = error
+
+    form(method="POST")
+
+        // ==========================
+        // Paciente
+        // ==========================
+        div
+
+            label Paciente
+
+            select(name="paciente_id" required)
+
+                each paciente in pacientes
+
+                    option(
+                        value=paciente.id_paciente
+                        selected=paciente.id_paciente === cita.paciente_id
+                    )
+
+                        = paciente.usuario.nombres + ' ' + paciente.usuario.apellidos
+
+        br
+
+        // ==========================
+        // Médico
+        // ==========================
+        div
+
+            label Médico
+
+            select(name="medico_id" required)
+
+                each medico in medicos
+
+                    option(
+                        value=medico.id_medico
+                        selected=medico.id_medico === cita.medico_id
+                    )
+
+                        = medico.usuario.nombres + ' ' + medico.usuario.apellidos
+
+        br
+
+        // ==========================
+        // Estado
+        // ==========================
+        div
+
+            label Estado
+
+            select(name="estado_id" required)
+
+                each estado in estados
+
+                    option(
+                        value=estado.id_estado
+                        selected=estado.id_estado === cita.estado_id
+                    )
+
+                        = estado.nombre
+
+        br
+
+        // ==========================
+        // Fecha
+        // ==========================
+        div
+
+            label Fecha
+
+            input(
+                type="date"
+                name="fecha"
+                value=cita.fecha
+                required
+            )
+
+        br
+
+        // ==========================
+        // Hora
+        // ==========================
+        div
+
+            label Hora
+
+            input(
+                type="time"
+                name="hora"
+                value=cita.hora
+                required
+            )
+
+        br
+
+        // ==========================
+        // Motivo
+        // ==========================
+        div
+
+            label Motivo de consulta
+
+            textarea(
+                name="motivo_consulta"
+                rows="5"
+            )= cita.motivo_consulta
+
+        br
+
+        button(type="submit")
+            Guardar Cambios

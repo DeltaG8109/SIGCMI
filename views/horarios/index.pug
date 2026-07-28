@@ -1,0 +1,49 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Horarios
+
+    br
+
+    a(href="/horarios/crear") + Nuevo Horario
+
+    br
+    br
+
+    table(border="1" cellpadding="10")
+
+        thead
+
+            tr
+
+                th Médico
+                th Día
+                th Inicio
+                th Fin
+                th Estado
+                th Acciones
+
+        tbody
+
+            each horario in horarios
+
+                tr
+
+                    td= horario.medico.usuario.nombres + ' ' + horario.medico.usuario.apellidos
+
+                    td= horario.dia_semana
+
+                    td= horario.hora_inicio
+
+                    td= horario.hora_fin
+
+                    td= horario.estado
+
+                    td
+
+                        a(href=`/horarios/editar/${horario.id_horario}`) ✏️
+
+                        |  
+
+                        a(href=`/horarios/eliminar/${horario.id_horario}`) 🗑️

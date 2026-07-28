@@ -1,0 +1,34 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Cancelar Cita
+
+    p
+        strong ID de la cita:
+        |  #{cita.id_cita}
+
+    br
+
+    form(method="POST")
+
+        div
+
+            label Motivo de la cancelación
+
+            textarea(
+                name="motivo_cancelacion"
+                rows="6"
+                required
+            )
+
+        br
+
+        button(type="submit")
+            |Confirmar Cancelación
+
+        a(
+            href="/citas"
+            style="margin-left:20px;"
+        )
+            |Volver

@@ -1,0 +1,56 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Citas
+
+    br
+
+    a(href="/citas/crear") + Nueva Cita
+
+    br
+    br
+
+    table(border="1" cellpadding="10")
+
+        thead
+
+            tr
+
+                th Paciente
+                th Médico
+                th Fecha
+                th Hora
+                th Estado
+                th Acciones
+
+        tbody
+
+            each cita in citas
+
+                tr
+
+                    td= cita.paciente.usuario.nombres + ' ' + cita.paciente.usuario.apellidos
+
+                    td= cita.medico.usuario.nombres + ' ' + cita.medico.usuario.apellidos
+
+                    td= cita.fecha
+
+                    td= cita.hora
+
+                    td= cita.estado.nombre
+
+                    td
+    
+                        if cita.estado.nombre !== 'Cancelada'
+    
+                            a(href=`/citas/editar/${cita.id_cita}`) ✏️
+    
+                            a(href=`/citas/reprogramar/${cita.id_cita}`) 🔄
+    
+                            a(href=`/citas/cancelar/${cita.id_cita}`) ❌
+    
+                        else
+    
+                            span(style="color:red;font-weight:bold;")
+                                |Cancelada

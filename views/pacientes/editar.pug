@@ -1,0 +1,110 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Editar Paciente
+
+    form(method="POST")
+
+        div
+
+            label Usuario
+
+            input(
+                type="text"
+                value=paciente.usuario.nombres + ' ' + paciente.usuario.apellidos
+                readonly
+            )
+
+        br
+
+        div
+
+            label Fecha de nacimiento
+
+            input(
+                type="date"
+                name="fecha_nacimiento"
+                value=paciente.fecha_nacimiento
+                required
+            )
+
+        br
+
+        div
+
+            label Tipo de sangre
+
+            select(name="tipo_sangre")
+
+                option(value="A+" selected=paciente.tipo_sangre==='A+') A+
+                option(value="A-" selected=paciente.tipo_sangre==='A-') A-
+                option(value="B+" selected=paciente.tipo_sangre==='B+') B+
+                option(value="B-" selected=paciente.tipo_sangre==='B-') B-
+                option(value="AB+" selected=paciente.tipo_sangre==='AB+') AB+
+                option(value="AB-" selected=paciente.tipo_sangre==='AB-') AB-
+                option(value="O+" selected=paciente.tipo_sangre==='O+') O+
+                option(value="O-" selected=paciente.tipo_sangre==='O-') O-
+
+        br
+
+        div
+
+            label Alergias
+
+            textarea(
+                name="alergias"
+                rows="3"
+            )= paciente.alergias
+
+        br
+
+        div
+
+            label Condiciones médicas
+
+            textarea(
+                name="condiciones_medicas"
+                rows="3"
+            )= paciente.condiciones_medicas
+
+        br
+
+        div
+
+            label Dirección
+
+            input(
+                type="text"
+                name="direccion"
+                value=paciente.direccion
+            )
+
+        br
+
+        div
+
+            label Departamento
+
+            input(
+                type="text"
+                name="departamento"
+                value=paciente.departamento
+            )
+
+        br
+
+        div
+
+            label Ciudad
+
+            input(
+                type="text"
+                name="ciudad"
+                value=paciente.ciudad
+            )
+
+        br
+
+        button(type="submit")
+            Guardar Cambios

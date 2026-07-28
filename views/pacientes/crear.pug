@@ -1,0 +1,115 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Nuevo Paciente
+
+    if error
+
+        p(style="color:red;font-weight:bold;")
+            = error
+
+    form(method="POST")
+
+        div
+
+            label Usuario
+
+            select(name="usuario_id" required)
+
+                option(value="") -- Seleccione --
+
+                each usuario in usuarios
+
+                    option(value=usuario.id_usuario)
+
+                        = usuario.nombres + ' ' + usuario.apellidos
+
+        br
+
+        div
+
+            label Fecha de nacimiento
+
+            input(
+                type="date"
+                name="fecha_nacimiento"
+                required
+            )
+
+        br
+
+        div
+
+            label Tipo de sangre
+
+            select(name="tipo_sangre")
+
+                option(value="A+") A+
+                option(value="A-") A-
+                option(value="B+") B+
+                option(value="B-") B-
+                option(value="AB+") AB+
+                option(value="AB-") AB-
+                option(value="O+") O+
+                option(value="O-") O-
+
+        br
+
+        div
+
+            label Alergias
+
+            textarea(
+                name="alergias"
+                rows="3"
+            )
+
+        br
+
+        div
+
+            label Condiciones médicas
+
+            textarea(
+                name="condiciones_medicas"
+                rows="3"
+            )
+
+        br
+
+        div
+
+            label Dirección
+
+            input(
+                type="text"
+                name="direccion"
+            )
+
+        br
+
+        div
+
+            label Departamento
+
+            input(
+                type="text"
+                name="departamento"
+            )
+
+        br
+
+        div
+
+            label Ciudad
+
+            input(
+                type="text"
+                name="ciudad"
+            )
+
+        br
+
+        button(type="submit")
+            |Guardar

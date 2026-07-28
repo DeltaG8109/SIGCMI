@@ -1,0 +1,36 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Nueva Especialidad
+
+    if errores
+        each error in errores
+            p(style="color:red")
+                = error.msg
+
+    form(method="POST")
+
+        div
+            label Nombre
+
+            input(
+                type="text"
+                name="nombre"
+                required
+            )
+
+        br
+
+        div
+            label Descripción
+
+            textarea(
+                name="descripcion"
+                rows="5"
+            )
+
+        br
+
+        button(type="submit")
+            Guardar Especialidad

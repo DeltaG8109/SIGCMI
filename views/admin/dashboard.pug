@@ -1,0 +1,33 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Dashboard
+
+    h2 Bienvenido #{usuario.nombres}
+
+    .cards
+
+        .card
+
+            h3 Usuarios
+
+            h1= totalUsuarios
+
+        .card
+
+            h3 Médicos
+
+            h1= totalMedicos
+
+        .card
+
+            h3 Pacientes
+
+            h1= totalPacientes
+
+        .card
+
+            h3 Citas
+
+            h1= totalCitas

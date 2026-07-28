@@ -1,0 +1,50 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Pacientes
+
+    br
+
+    a(href="/pacientes/crear") + Nuevo Paciente
+
+    br
+    br
+
+    table(border="1" cellpadding="10")
+
+        thead
+
+            tr
+
+                th Nombre
+
+                th Fecha Nacimiento
+
+                th Tipo Sangre
+
+                th Ciudad
+
+                th Acciones
+
+        tbody
+
+            each paciente in pacientes
+
+                tr
+
+                    td= paciente.usuario.nombres + ' ' + paciente.usuario.apellidos
+
+                    td= paciente.fecha_nacimiento
+
+                    td= paciente.tipo_sangre
+
+                    td= paciente.ciudad
+
+                    td
+
+                        a(href=`/pacientes/editar/${paciente.id_paciente}`) ✏️
+
+                        | 
+
+                        a(href=`/pacientes/eliminar/${paciente.id_paciente}`) 🗑️

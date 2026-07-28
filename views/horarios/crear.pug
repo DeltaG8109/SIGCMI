@@ -1,0 +1,67 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Nuevo Horario
+    if error
+
+    p(style="background:#fee2e2;color:#b91c1c;padding:10px;border-radius:8px;margin-bottom:20px;")= error
+    form(method="POST")
+
+        div
+
+            label Médico
+
+            select(name="medico_id" required)
+
+                option(value="") -- Seleccione --
+
+                each medico in medicos
+
+                    option(value=medico.id_medico)
+                        = medico.usuario.nombres + ' ' + medico.usuario.apellidos
+
+        br
+
+        div
+
+            label Día de la semana
+
+            select(name="dia_semana" required)
+
+                option(value="Lunes") Lunes
+                option(value="Martes") Martes
+                option(value="Miercoles") Miércoles
+                option(value="Jueves") Jueves
+                option(value="Viernes") Viernes
+                option(value="Sabado") Sábado
+                option(value="Domingo") Domingo
+
+        br
+
+        div
+
+            label Hora de inicio
+
+            input(
+                type="time"
+                name="hora_inicio"
+                required
+            )
+
+        br
+
+        div
+
+            label Hora de fin
+
+            input(
+                type="time"
+                name="hora_fin"
+                required
+            )
+
+        br
+
+        button(type="submit")
+            Guardar Horario

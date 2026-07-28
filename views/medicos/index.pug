@@ -1,0 +1,50 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Médicos
+
+    br
+
+    a(href="/medicos/crear") + Nuevo Médico
+
+    br
+    br
+
+    table(border="1" cellpadding="10")
+
+        thead
+
+            tr
+
+                th ID
+
+                th Nombre
+
+                th Especialidad
+
+                th Experiencia
+
+                th Acciones
+
+        tbody
+
+            each medico in medicos
+
+                tr
+
+                    td= medico.id_medico
+
+                    td= medico.usuario.nombres + ' ' + medico.usuario.apellidos
+
+                    td= medico.especialidad.nombre
+
+                    td= medico.anios_experiencia + ' años'
+
+                    td
+
+                        a(href=`/medicos/editar/${medico.id_medico}`) ✏️ Editar
+
+                        |  
+
+                        a(href=`/medicos/eliminar/${medico.id_medico}`) 🗑️ Eliminar

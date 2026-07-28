@@ -1,0 +1,65 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Nuevo Médico
+
+    form(method="POST")
+
+        div
+
+            label Usuario
+
+            select(name="usuario_id" required)
+
+                option(value="") -- Seleccione un usuario --
+
+                each usuario in usuarios
+
+                    option(value=usuario.id_usuario)
+                        = usuario.nombres + ' ' + usuario.apellidos
+
+        br
+
+        div
+
+            label Especialidad
+
+            select(name="especialidad_id" required)
+
+                option(value="") -- Seleccione una especialidad --
+
+                each especialidad in especialidades
+
+                    option(value=especialidad.id_especialidad)
+                        = especialidad.nombre
+
+        br
+
+        div
+
+            label Cédula Profesional
+
+            input(
+                type="text"
+                name="cedula_profesional"
+                required
+            )
+
+        br
+
+        div
+
+            label Años de experiencia
+
+            input(
+                type="number"
+                name="anios_experiencia"
+                min="0"
+                required
+            )
+
+        br
+
+        button(type="submit")
+            |Guardar Médico

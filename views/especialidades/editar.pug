@@ -1,0 +1,32 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Editar Especialidad
+
+    form(method="POST" action=`/especialidades/editar/${especialidad.id_especialidad}`)
+
+        div
+            label Nombre
+
+            input(
+                type="text"
+                name="nombre"
+                value=especialidad.nombre
+                required
+            )
+
+        br
+
+        div
+            label Descripción
+
+            textarea(
+                name="descripcion"
+                rows="5"
+            )= especialidad.descripcion
+
+        br
+
+        button(type="submit")
+            Actualizar Guardar Cambios

@@ -1,0 +1,49 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Usuarios
+
+    br
+
+    a(href="/usuarios/crear") + Nuevo Usuario
+
+    br
+    br
+
+    table(border="1" cellpadding="10")
+
+        thead
+
+            tr
+
+                th Nombre
+                th Correo
+                th Teléfono
+                th Rol
+                th Estado
+                th Acciones
+
+        tbody
+
+            each usuarioItem in usuarios
+
+                tr
+
+                    td= usuarioItem.nombres + ' ' + usuarioItem.apellidos
+
+                    td= usuarioItem.correo
+
+                    td= usuarioItem.telefono
+
+                    td= usuarioItem.rol.nombre
+
+                    td= usuarioItem.estado ? 'Activo' : 'Inactivo'
+
+                    td
+
+                        a(href=`/usuarios/editar/${usuarioItem.id_usuario}`) ✏️
+
+                        | 
+
+                        a(href=`/usuarios/eliminar/${usuarioItem.id_usuario}`) 🗑️

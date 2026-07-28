@@ -6,66 +6,147 @@ block contenido
 
         div
 
-            h1 Dashboard
+            h1(class="text-4xl font-bold text-gray-800")
+                | Dashboard
 
-            h2 Bienvenido #{usuario.nombres}
+            h2(class="text-xl text-gray-600 mt-2")
+                | Bienvenido #{usuario.nombres}
 
-            p(style="color:#6b7280;font-size:16px;margin-bottom:25px;")
+            p(class="text-gray-500 mt-2")
                 | 📅 Hoy es #{fechaActual}
+
+            p(
+                id="horaActual"
+                class="text-lg text-blue-600 font-semibold mt-1"
+            )
 
     //==============================
     // RESUMEN GENERAL
     //==============================
 
-    div(class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10")
+    div(class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-10")
 
-        div(class="bg-blue-600 text-white rounded-xl shadow-lg p-6")
-            h3(class="text-lg font-semibold") Usuarios
-            h1(class="text-5xl font-bold mt-3")= totalUsuarios
+        div(class="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-2xl shadow-xl p-6 hover:scale-105 transition duration-300")
 
-        div(class="<bg-green-600 text-white rounded-xl shadow-lg p-6")
-            h3(class="text-lg font-semibold") Médicos
-            h1(class="text-5xl font-bold mt-3")= totalMedicos
+            p(class="text-lg")
+                | 👤 Usuarios
 
-        div(class="bg-purple-600 text-white rounded-xl shadow-lg p-6")
-            h3(class="text-lg font-semibold") Pacientes
-            h1(class="text-5xl font-bold mt-3")= totalPacientes
+            h1(class="text-5xl font-bold mt-4")
+                = totalUsuarios
 
-        div(class="bg-orange-500 text-white rounded-xl shadow-lg p-6")
-            h3(class="text-lg font-semibold") Citas
-            h1(class="text-5xl font-bold mt-3")= totalCitas
+        div(class="bg-gradient-to-r from-green-500 to-green-700 text-white rounded-2xl shadow-xl p-6 hover:scale-105 transition duration-300")
+
+            p(class="text-lg")
+                | 👨‍⚕️ Médicos
+
+            h1(class="text-5xl font-bold mt-4")
+                = totalMedicos
+
+        div(class="bg-gradient-to-r from-purple-500 to-purple-700 text-white rounded-2xl shadow-xl p-6 hover:scale-105 transition duration-300")
+
+            p(class="text-lg")
+                | ❤️ Pacientes
+
+            h1(class="text-5xl font-bold mt-4")
+                = totalPacientes
+
+        div(class="bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-2xl shadow-xl p-6 hover:scale-105 transition duration-300")
+
+            p(class="text-lg")
+                | 📅 Citas
+
+            h1(class="text-5xl font-bold mt-4")
+                = totalCitas
 
     //==============================
-    // ESTADO DE CITAS
+    // ACCESOS RÁPIDOS
     //==============================
 
-    h2(class="text-2xl font-bold mb-5") Estado de las Citas
+    h2(class="text-2xl font-bold mb-6")
+        | ⚡ Accesos rápidos
+
+    div(class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 mb-10")
+
+        a(
+            href="/citas/crear"
+            class="bg-white rounded-xl shadow-lg p-5 text-center hover:bg-blue-600 hover:text-white transition duration-300"
+        )
+            h1(class="text-5xl") 📅
+            p(class="mt-2 font-semibold") Nueva Cita
+
+        a(
+            href="/pacientes/crear"
+            class="bg-white rounded-xl shadow-lg p-5 text-center hover:bg-green-600 hover:text-white transition duration-300"
+        )
+            h1(class="text-5xl") ❤️
+            p(class="mt-2 font-semibold") Nuevo Paciente
+
+        a(
+            href="/medicos/crear"
+            class="bg-white rounded-xl shadow-lg p-5 text-center hover:bg-purple-600 hover:text-white transition duration-300"
+        )
+            h1(class="text-5xl") 👨‍⚕️
+            p(class="mt-2 font-semibold") Nuevo Médico
+
+        a(
+            href="/diagnosticos/crear"
+            class="bg-white rounded-xl shadow-lg p-5 text-center hover:bg-red-600 hover:text-white transition duration-300"
+        )
+            h1(class="text-5xl") 🩺
+            p(class="mt-2 font-semibold") Diagnóstico
+
+        a(
+            href="/prescripciones/crear"
+            class="bg-white rounded-xl shadow-lg p-5 text-center hover:bg-orange-600 hover:text-white transition duration-300"
+        )
+            h1(class="text-5xl") 💊
+            p(class="mt-2 font-semibold") Prescripción
+
+    //==============================
+    // ESTADO DE LAS CITAS
+    //==============================
+
+    h2(class="text-2xl font-bold mb-5")
+        | Estado de las Citas
 
     div(class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10")
 
-        div(class="bg-yellow-100 rounded-xl shadow p-6 text-center")
-            h3(class="text-yellow-800 font-semibold text-lg") Pendientes
-            p(class="text-5xl font-bold text-yellow-600 mt-3")= citasPendientes
+        div(class="bg-yellow-100 rounded-2xl shadow-lg p-6 text-center")
 
-        div(class="bg-green-100 rounded-xl shadow p-6 text-center")
-            h3(class="text-green-800 font-semibold text-lg") Completadas
-            p(class="text-5xl font-bold text-green-600 mt-3")= citasCompletadas
+            h3(class="text-yellow-700 text-lg font-semibold")
+                | Pendientes
 
-        div(class="bg-red-100 rounded-xl shadow p-6 text-center")
-            h3(class="text-red-800 font-semibold text-lg") Canceladas
-            p(class="text-5xl font-bold text-red-600 mt-3")= citasCanceladas
+            p(class="text-5xl font-bold text-yellow-500 mt-3")
+                = citasPendientes
+
+        div(class="bg-green-100 rounded-2xl shadow-lg p-6 text-center")
+
+            h3(class="text-green-700 text-lg font-semibold")
+                | Completadas
+
+            p(class="text-5xl font-bold text-green-600 mt-3")
+                = citasCompletadas
+
+        div(class="bg-red-100 rounded-2xl shadow-lg p-6 text-center")
+
+            h3(class="text-red-700 text-lg font-semibold")
+                | Canceladas
+
+            p(class="text-5xl font-bold text-red-600 mt-3")
+                = citasCanceladas
 
     //==============================
     // ÚLTIMAS CITAS
     //==============================
 
-    h2(class="text-2xl font-bold mb-5") Últimas Citas Registradas
+    h2(class="text-2xl font-bold mb-5")
+        | Últimas Citas Registradas
 
-    div(class="bg-white rounded-xl shadow-lg overflow-hidden")
+    div(class="bg-white rounded-2xl shadow-xl overflow-hidden")
 
         table(class="w-full")
 
-            thead(class="bg-blue-600 text-white")
+            thead(class="bg-slate-800 text-white")
 
                 tr
 
@@ -77,121 +158,106 @@ block contenido
 
                     th(class="px-6 py-4 text-center") Hora
 
-                tbody
+            tbody
 
-                    if ultimasCitas.length
+                if ultimasCitas.length
 
-                        each cita in ultimasCitas
+                    each cita in ultimasCitas
 
-                            tr(class="border-b hover:bg-gray-100")
+                        tr(class="border-b hover:bg-blue-50 transition")
 
-                                td(class="px-6 py-4")
-                                    strong= cita.paciente.usuario.nombres + ' ' + cita.paciente.usuario.apellidos
+                            td(class="px-6 py-4 font-semibold")
+                                = cita.paciente.usuario.nombres + ' ' + cita.paciente.usuario.apellidos
 
-                                td(class="px-6 py-4")
-                                    = cita.medico.usuario.nombres + ' ' + cita.medico.usuario.apellidos
+                            td(class="px-6 py-4")
+                                = cita.medico.usuario.nombres + ' ' + cita.medico.usuario.apellidos
 
-                                td(class="px-6 py-4 text-center")
+                            td(class="px-6 py-4 text-center")
 
-                                    if cita.estado.nombre === 'Pendiente'
+                                if cita.estado.nombre === 'Pendiente'
 
-                                        span(class="bg-yellow-200 text-yellow-900 px-4 py-1 rounded-full font-semibold")
-                                            = cita.estado.nombre
+                                    span(class="bg-yellow-200 text-yellow-800 px-4 py-1 rounded-full font-semibold")
+                                        = cita.estado.nombre
 
-                                    else if cita.estado.nombre === 'Completada'
+                                else if cita.estado.nombre === 'Completada'
 
-                                        span(class="bg-green-200 text-green-900 px-4 py-1 rounded-full font-semibold")
-                                            = cita.estado.nombre
+                                    span(class="bg-green-200 text-green-800 px-4 py-1 rounded-full font-semibold")
+                                        = cita.estado.nombre
 
-                                    else if cita.estado.nombre === 'Cancelada'
+                                else if cita.estado.nombre === 'Cancelada'
 
-                                        span(class="bg-red-200 text-red-900 px-4 py-1 rounded-full font-semibold")
-                                            = cita.estado.nombre
+                                    span(class="bg-red-200 text-red-800 px-4 py-1 rounded-full font-semibold")
+                                        = cita.estado.nombre
 
-                                    else
+                                else
 
-                                        span(class="bg-gray-200 text-gray-800 px-4 py-1 rounded-full")
-                                            = cita.estado.nombre
+                                    span(class="bg-gray-200 text-gray-800 px-4 py-1 rounded-full")
+                                        = cita.estado.nombre
 
-                                td(class="px-6 py-4 text-center")
-                                    = cita.hora
+                            td(class="px-6 py-4 text-center")
+                                = cita.hora
 
-                    else
+                else
 
-                        tr
+                    tr
 
-                            td(colspan="4" class="text-center py-8 text-gray-500")
-                                | No hay citas registradas.
+                        td(colspan="4" class="py-8 text-center text-gray-500")
+                            | No hay citas registradas.
 
-    br
-
-    //==============================
-    // GRÁFICO
-    //==============================
-
-    div(class="bg-white rounded-xl shadow-lg p-6 mt-8")
-
-        h2(class="text-2xl font-bold mb-5")
-            | Estadísticas de Citas
-
-        div(class="flex justify-center")
-
-            div(style="width:420px;height:420px;")
-
-                canvas(id="graficoCitas")
-
-    script.
-
-        const ctx = document.getElementById('graficoCitas');
-
-        new Chart(ctx, {
-
-            type: 'doughnut',
-
-            data: {
-
-                labels: [
-                    'Pendientes',
-                    'Completadas',
-                    'Canceladas'
-                ],
-
-                datasets: [{
-
-                    data: [
-                        !{citasPendientes},
-                        !{citasCompletadas},
-                        !{citasCanceladas}
+        br
+        //==============================
+        // GRÁFICO
+        //==============================
+        div(class="bg-white rounded-2xl shadow-xl p-8 mt-8")
+            h2(class="text-2xl font-bold mb-6")
+                | 📊 Estadísticas de Citas
+            div(class="flex justify-center")
+                div(style="width:450px;height:450px")
+                    canvas#graficoCitas
+        script.
+            const ctx = document.getElementById('graficoCitas');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [
+                        'Pendientes',
+                        'Completadas',
+                        'Canceladas'
                     ],
-
-                    backgroundColor: [
-                        '#FACC15',
-                        '#22C55E',
-                        '#EF4444'
-                    ],
-
-                    borderWidth: 2
-
-                }]
-
-            },
-
-            options: {
-
-                responsive: true,
-
-                maintainAspectRatio: false,
-
-                plugins: {
-
-                    legend: {
-
-                        position: 'bottom'
-
+                    datasets: [{
+                        data: [
+                            !{citasPendientes},
+                            !{citasCompletadas},
+                            !{citasCanceladas}
+                        ],
+                        backgroundColor: [
+                            '#FACC15',
+                            '#22C55E',
+                            '#EF4444'
+                        ],
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    size: 15
+                                }
+                            }
+                        }
                     }
-
                 }
-
+            });
+        script.
+            function actualizarHora(){
+                const ahora = new Date()
+                document.getElementById("horaActual").innerHTML =
+                    "🕒 " + ahora.toLocaleTimeString('es-CO')
             }
-
-        });
+            setInterval(actualizarHora,1000)
+            actualizarHora()

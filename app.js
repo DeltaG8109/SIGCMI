@@ -13,6 +13,8 @@ import pacienteRoutes from './routes/pacienteRoutes.js'
 import usuarioRoutes from './routes/usuarioRoutes.js'
 import diagnosticoRoutes from './routes/diagnosticoRoutes.js'
 import prescripcionRoutes  from './routes/prescripcionRoutes.js'
+import historialRoutes from './routes/historialRoutes.js'
+
 
 const app = express()
 
@@ -62,6 +64,9 @@ app.use('/diagnosticos', diagnosticoRoutes)
 
 //Ruta de prescripciones
 app.use('/prescripciones', prescripcionRoutes)
+
+//Ruat de historial medico 
+app.use('/historial', historialRoutes)
 
 app.use(express.static(path.join(__dirname, 'public')))
 

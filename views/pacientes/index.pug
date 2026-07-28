@@ -14,17 +14,11 @@ block contenido
     table(border="1" cellpadding="10")
 
         thead
-
             tr
-
                 th Nombre
-
                 th Fecha Nacimiento
-
                 th Tipo Sangre
-
                 th Ciudad
-
                 th Acciones
 
         tbody
@@ -42,5 +36,8 @@ block contenido
                     td= paciente.ciudad
 
                     td
+                        a(href=`/historial/${paciente.id_paciente}` title="Ver historial") 📋
 
-                        a(href=`/pacientes/editar/${paciente.id_paciente}`) ✏️ Editar
+                        |  
+
+                        a(href=`/pacientes/editar/${paciente.id_paciente}` title="Editar") ✏️ Editar

@@ -1,0 +1,121 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Historial Clínico
+
+    hr
+
+    h2 Datos del Paciente
+
+    table(border="1" cellpadding="10")
+
+        tr
+            th Nombre
+            td= paciente.usuario.nombres + ' ' + paciente.usuario.apellidos
+
+        tr
+            th Fecha de nacimiento
+            td= paciente.fecha_nacimiento
+
+        tr
+            th Tipo de sangre
+            td= paciente.tipo_sangre || 'No registrada'
+
+        tr
+            th Ciudad
+            td= paciente.ciudad || 'No registrada'
+
+        tr
+            th Dirección
+            td= paciente.direccion || 'No registrada'
+
+        tr
+            th Alergias
+            td= paciente.alergias || 'Ninguna'
+
+        tr
+            th Condiciones médicas
+            td= paciente.condiciones_medicas || 'Ninguna'
+
+    br
+
+    h2 Historial de Atención
+
+    each cita in paciente.citas
+
+        .card(style="border:1px solid #ccc;padding:20px;margin-bottom:25px;border-radius:10px;")
+
+            h3 Cita del #{cita.fecha}
+
+            p
+                strong Médico:
+                |  #{cita.medico.usuario.nombres} #{cita.medico.usuario.apellidos}
+
+            p
+                strong Estado:
+                |  #{cita.estado.nombre}
+
+            if cita.diagnostico
+
+                hr
+
+                h4 Signos Vitales
+
+                ul
+                    li Temperatura: #{cita.diagnostico.temperatura} °C
+                    li Presión: #{cita.diagnostico.presion_arterial}
+                    li Altura: #{cita.diagnostico.altura} m
+                    li Peso: #{cita.diagnostico.peso} kg
+                    li Frecuencia Cardíaca: #{cita.diagnostico.frecuencia_cardiaca} bpm
+
+                h4 Síntomas
+
+                p= cita.diagnostico.sintomas
+
+                h4 Diagnóstico
+
+                p= cita.diagnostico.diagnostico
+
+                h4 Tratamiento
+
+                p= cita.diagnostico.tratamiento
+
+                h4 Medicamentos
+
+                if cita.diagnostico.prescripciones.length
+
+                    table(border="1" cellpadding="8")
+
+                        thead
+                            tr
+                                th Medicamento
+                                th Dosis
+                                th Frecuencia
+                                th Duración
+
+                        tbody
+
+                            each medicamento in cita.diagnostico.prescripciones
+
+                                tr
+
+                                    td= medicamento.nombre_medicamento
+                                    td= medicamento.dosis
+                                    td= medicamento.frecuencia
+                                    td= medicamento.duracion
+
+                else
+
+                    p No existen medicamentos registrados.
+
+            else
+
+                p(style="color:red")
+                    | Esta cita todavía no tiene diagnóstico.
+    br
+    button(onclick="window.print()")
+        | 🖨️ Imprimir Historia Clínica
+    a(href="/pacientes")
+        button(style="margin-left:15px")
+            | ← Volver

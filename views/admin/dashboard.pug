@@ -3,11 +3,15 @@ extends ../layout/admin
 block contenido
 
     .flex.justify-between.items-center.mb-8
+
         div
-            h1(class="text-4xl font-bold text-gray-800") Dashboard
-            p(class="text-gray-500 mt-2")
-                | Bienvenido,
-                strong(class="text-blue-600") #{usuario.nombres}
+
+            h1 Dashboard
+
+            h2 Bienvenido #{usuario.nombres}
+
+            p(style="color:#6b7280;font-size:16px;margin-bottom:25px;")
+                | 📅 Hoy es #{fechaActual}
 
     //==============================
     // RESUMEN GENERAL
@@ -31,7 +35,6 @@ block contenido
             h3(class="text-lg font-semibold") Citas
             h1(class="text-5xl font-bold mt-3")= totalCitas
 
-
     //==============================
     // ESTADO DE CITAS
     //==============================
@@ -51,7 +54,6 @@ block contenido
         div(class="bg-red-100 rounded-xl shadow p-6 text-center")
             h3(class="text-red-800 font-semibold text-lg") Canceladas
             p(class="text-5xl font-bold text-red-600 mt-3")= citasCanceladas
-
 
     //==============================
     // ÚLTIMAS CITAS
@@ -75,48 +77,121 @@ block contenido
 
                     th(class="px-6 py-4 text-center") Hora
 
-            tbody
+                tbody
 
-                if ultimasCitas.length
+                    if ultimasCitas.length
 
-                    each cita in ultimasCitas
+                        each cita in ultimasCitas
 
-                        tr(class="border-b hover:bg-gray-100")
+                            tr(class="border-b hover:bg-gray-100")
 
-                            td(class="px-6 py-4")
-                                strong= cita.paciente.usuario.nombres + ' ' + cita.paciente.usuario.apellidos
+                                td(class="px-6 py-4")
+                                    strong= cita.paciente.usuario.nombres + ' ' + cita.paciente.usuario.apellidos
 
-                            td(class="px-6 py-4")
-                                = cita.medico.usuario.nombres + ' ' + cita.medico.usuario.apellidos
+                                td(class="px-6 py-4")
+                                    = cita.medico.usuario.nombres + ' ' + cita.medico.usuario.apellidos
 
-                            td(class="px-6 py-4 text-center")
+                                td(class="px-6 py-4 text-center")
 
-                                if cita.estado.nombre === 'Pendiente'
+                                    if cita.estado.nombre === 'Pendiente'
 
-                                    span(class="bg-yellow-200 text-yellow-900 px-4 py-1 rounded-full font-semibold")
-                                        = cita.estado.nombre
+                                        span(class="bg-yellow-200 text-yellow-900 px-4 py-1 rounded-full font-semibold")
+                                            = cita.estado.nombre
 
-                                else if cita.estado.nombre === 'Completada'
+                                    else if cita.estado.nombre === 'Completada'
 
-                                    span(class="bg-green-200 text-green-900 px-4 py-1 rounded-full font-semibold")
-                                        = cita.estado.nombre
+                                        span(class="bg-green-200 text-green-900 px-4 py-1 rounded-full font-semibold")
+                                            = cita.estado.nombre
 
-                                else if cita.estado.nombre === 'Cancelada'
+                                    else if cita.estado.nombre === 'Cancelada'
 
-                                    span(class="bg-red-200 text-red-900 px-4 py-1 rounded-full font-semibold")
-                                        = cita.estado.nombre
+                                        span(class="bg-red-200 text-red-900 px-4 py-1 rounded-full font-semibold")
+                                            = cita.estado.nombre
 
-                                else
+                                    else
 
-                                    span(class="bg-gray-200 text-gray-800 px-4 py-1 rounded-full")
-                                        = cita.estado.nombre
+                                        span(class="bg-gray-200 text-gray-800 px-4 py-1 rounded-full")
+                                            = cita.estado.nombre
 
-                            td(class="px-6 py-4 text-center")
-                                = cita.hora
+                                td(class="px-6 py-4 text-center")
+                                    = cita.hora
 
-                else
+                    else
 
-                    tr
+                        tr
 
-                        td(colspan="4" class="text-center py-8 text-gray-500")
-                            | No hay citas registradas.
+                            td(colspan="4" class="text-center py-8 text-gray-500")
+                                | No hay citas registradas.
+
+    br
+
+    //==============================
+    // GRÁFICO
+    //==============================
+
+    div(class="bg-white rounded-xl shadow-lg p-6 mt-8")
+
+        h2(class="text-2xl font-bold mb-5")
+            | Estadísticas de Citas
+
+        div(class="flex justify-center")
+
+            div(style="width:420px;height:420px;")
+
+                canvas(id="graficoCitas")
+
+    script.
+
+        const ctx = document.getElementById('graficoCitas');
+
+        new Chart(ctx, {
+
+            type: 'doughnut',
+
+            data: {
+
+                labels: [
+                    'Pendientes',
+                    'Completadas',
+                    'Canceladas'
+                ],
+
+                datasets: [{
+
+                    data: [
+                        !{citasPendientes},
+                        !{citasCompletadas},
+                        !{citasCanceladas}
+                    ],
+
+                    backgroundColor: [
+                        '#FACC15',
+                        '#22C55E',
+                        '#EF4444'
+                    ],
+
+                    borderWidth: 2
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+
+                        position: 'bottom'
+
+                    }
+
+                }
+
+            }
+
+        });

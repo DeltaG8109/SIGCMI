@@ -68,6 +68,16 @@ const dashboard = async (req, res) => {
 
     })
 
+    const hoy = new Date()
+
+    const fechaActual =
+        hoy.toLocaleDateString('es-CO', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        })
+
     res.render('admin/dashboard', {
 
         pagina: 'Dashboard',
@@ -88,7 +98,9 @@ const dashboard = async (req, res) => {
 
         citasCanceladas,
 
-        ultimasCitas
+        ultimasCitas,
+        
+        fechaActual
 
     })
 

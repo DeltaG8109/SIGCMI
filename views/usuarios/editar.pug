@@ -2,7 +2,7 @@ extends ../layout/admin
 
 block contenido
 
-    h1 Nuevo Usuario
+    h1 Editar Usuario
 
     form(method="POST")
 
@@ -12,6 +12,7 @@ block contenido
             input(
                 type="text"
                 name="nombres"
+                value=usuarioEditar.nombres
                 required
             )
 
@@ -23,6 +24,7 @@ block contenido
             input(
                 type="text"
                 name="apellidos"
+                value=usuarioEditar.apellidos
                 required
             )
 
@@ -34,6 +36,7 @@ block contenido
             input(
                 type="email"
                 name="correo"
+                value=usuarioEditar.correo
                 required
             )
 
@@ -45,6 +48,7 @@ block contenido
             input(
                 type="text"
                 name="telefono"
+                value=usuarioEditar.telefono
             )
 
         br
@@ -55,6 +59,7 @@ block contenido
             input(
                 type="text"
                 name="tipo_documento"
+                value=usuarioEditar.tipo_documento
             )
 
         br
@@ -65,6 +70,7 @@ block contenido
             input(
                 type="text"
                 name="numero_documento"
+                value=usuarioEditar.numero_documento
             )
 
         br
@@ -76,21 +82,30 @@ block contenido
 
                 each rol in roles
 
-                    option(value=rol.id_rol)
+                    option(
+                        value=rol.id_rol
+                        selected=usuarioEditar.rol_id === rol.id_rol
+                    )
                         = rol.nombre
 
         br
 
         div
-            label Contraseña
+            label Estado
 
-            input(
-                type="password"
-                name="password"
-                required
-            )
+            select(name="estado")
+
+                option(
+                    value="true"
+                    selected=usuarioEditar.estado
+                ) Activo
+
+                option(
+                    value="false"
+                    selected=!usuarioEditar.estado
+                ) Inactivo
 
         br
 
         button(type="submit")
-            |Guardar
+            |Actualizar

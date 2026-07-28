@@ -17,12 +17,8 @@ block contenido
             tr
                 th Paciente
                 th Médico
-                th Fecha
-                th Temperatura
-                th Presión
                 th Diagnóstico
                 th Tratamiento
-                th Acciones
 
         tbody
 
@@ -34,15 +30,6 @@ block contenido
 
                     td= diagnostico.cita.medico.usuario.nombres + ' ' + diagnostico.cita.medico.usuario.apellidos
 
-                    td= diagnostico.cita.fecha
-
-                    td= diagnostico.temperatura + " °C"
-
-                    td= diagnostico.presion_arterial
-
                     td= diagnostico.diagnostico
 
                     td= diagnostico.tratamiento
-
-                    td
-                        a(href=`/diagnosticos/ver/${diagnostico.id_diagnostico}`) 👁️ Ver

@@ -10,7 +10,8 @@ import {
     editarCita,
     formularioCancelarCita,
     cancelarCita,
-    confirmarCita
+    confirmarCita,
+    finalizarCita
 } from '../controllers/citaController.js'
 
 const router = express.Router()
@@ -37,4 +38,8 @@ router.post('/cancelar/:id', protegerRuta, cancelarCita)
 
 //Ruta de confirmar cita
 router.get('/confirmar/:id', protegerRuta, confirmarCita)
+
+//Ruta de finalizar Cita
+router.get('/finalizar/:id', protegerRuta, finalizarCita)
+
 export default router

@@ -731,7 +731,29 @@ const confirmarCita = async (req, res) => {
 
 }
 
+// ======================================
+// Finalizar cita
+// ======================================
 
+const finalizarCita = async (req, res) => {
+
+    const { id } = req.params
+
+    const cita = await Cita.findByPk(id)
+
+    if (!cita) {
+        return res.redirect('/citas')
+    }
+
+    await cita.update({
+
+        estado_id: 3
+
+    })
+
+    res.redirect('/citas')
+
+}
 
 export {
 
@@ -753,6 +775,8 @@ export {
 
     reprogramarCita,
 
-    confirmarCita
+    confirmarCita,
+
+    finalizarCita
 
 }

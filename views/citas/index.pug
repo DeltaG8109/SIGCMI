@@ -73,18 +73,47 @@ block contenido
                                 = cita.estado.nombre
 
                     td
+
                         if cita.estado.nombre === 'Pendiente'
 
-                            a(href=`/citas/confirmar/${cita.id_cita}` title="Confirmar") ✅
+                            a(
+                                href=`/citas/confirmar/${cita.id_cita}`
+                                title="Confirmar"
+                            ) ✅
 
                             |  
 
-                        a(href=`/citas/editar/${cita.id_cita}` title="Editar") ✏️
+                        if cita.estado.nombre === 'Confirmada'
 
-                        |  
+                            a(
+                                href=`/citas/finalizar/${cita.id_cita}`
+                                title="Finalizar"
+                            ) 🏥
 
-                        a(href=`/citas/reprogramar/${cita.id_cita}` title="Reprogramar") 🔄
+                            |  
 
-                        |  
+                        if cita.estado.nombre !== 'Cancelada' && cita.estado.nombre !== 'Completada'
 
-                        a(href=`/citas/cancelar/${cita.id_cita}` title="Cancelar") ❌
+                            a(
+                                href=`/citas/editar/${cita.id_cita}`
+                                title="Editar"
+                            ) ✏️
+
+                            |
+
+                            a(
+                                href=`/citas/reprogramar/${cita.id_cita}`
+                                title="Reprogramar"
+                            ) 🔄
+
+                            |
+
+                            a(
+                                href=`/citas/cancelar/${cita.id_cita}`
+                                title="Cancelar"
+                            ) ❌
+
+                        else
+
+                            span(style="color:green;font-weight:bold")
+                                |✔ Finalizada

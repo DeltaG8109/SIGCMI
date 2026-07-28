@@ -1,0 +1,67 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Nuevo Diagnóstico
+
+    form(method="POST")
+
+        label Cita
+
+        select(name="cita_id")
+
+            each cita in citas
+
+                option(value=cita.id_cita)
+                    = cita.paciente.usuario.nombres + ' - ' + cita.medico.usuario.nombres
+
+        br
+        br
+
+        label Temperatura
+        input(type="number" step="0.1" name="temperatura")
+
+        br
+
+        label Presión Arterial
+        input(type="text" name="presion_arterial")
+
+        br
+
+        label Altura
+        input(type="number" step="0.01" name="altura")
+
+        br
+
+        label Peso
+        input(type="number" step="0.01" name="peso")
+
+        br
+
+        label Frecuencia Cardíaca
+        input(type="number" name="frecuencia_cardiaca")
+
+        br
+
+        label Síntomas
+        textarea(name="sintomas")
+
+        br
+
+        label Diagnóstico
+        textarea(name="diagnostico")
+
+        br
+
+        label Tratamiento
+        textarea(name="tratamiento")
+
+        br
+
+        label Notas
+        textarea(name="notas_adicionales")
+
+        br
+        br
+
+        button(type="submit") Guardar

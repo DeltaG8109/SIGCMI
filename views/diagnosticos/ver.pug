@@ -1,0 +1,70 @@
+extends ../layout/admin
+
+block contenido
+
+    h1 Historia Clínica
+
+    h3 Paciente: #{diagnostico.cita.paciente.usuario.nombres} #{diagnostico.cita.paciente.usuario.apellidos}
+
+    p
+        strong Médico:
+        |  #{diagnostico.cita.medico.usuario.nombres} #{diagnostico.cita.medico.usuario.apellidos}
+
+    p
+        strong Fecha:
+        |  #{diagnostico.cita.fecha}
+
+    hr
+
+    h2 Signos Vitales
+
+    table(border="1" cellpadding="10")
+
+        tr
+            th Temperatura
+            td #{diagnostico.temperatura} °C
+
+            th Presión
+            td #{diagnostico.presion_arterial}
+
+        tr
+            th Altura
+            td #{diagnostico.altura} m
+
+            th Peso
+            td #{diagnostico.peso} kg
+
+        tr
+            th Frecuencia Cardíaca
+            td(colspan="3") #{diagnostico.frecuencia_cardiaca} bpm
+
+    br
+
+    h2 Síntomas
+
+    .caja
+        p= diagnostico.sintomas
+
+    h2 Diagnóstico
+
+    .caja
+        p= diagnostico.diagnostico
+
+    h2 Tratamiento
+
+    .caja
+        p= diagnostico.tratamiento
+
+    h2 Notas adicionales
+
+    .caja
+        p= diagnostico.notas_adicionales
+
+    br
+
+    button(onclick="window.print()")
+        | 🖨️ Imprimir Historia Clínica
+
+    a(href="/diagnosticos")
+        button(style="margin-left:15px")
+            | ← Volver

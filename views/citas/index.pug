@@ -91,6 +91,14 @@ block contenido
                             ) 🏥
 
                             |  
+                        if cita.estado.nombre === 'Completada'
+
+                            |
+
+                            a(
+                                href=`/diagnosticos/crear/${cita.id_cita}`
+                                title="Diagnóstico"
+                            ) 🩺
 
                         if cita.estado.nombre !== 'Cancelada' && cita.estado.nombre !== 'Completada'
 

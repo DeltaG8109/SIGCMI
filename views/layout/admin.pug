@@ -2,41 +2,85 @@ doctype html
 html(lang="es")
 
     head
-
         meta(charset="UTF-8")
-
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
 
-        title SIGCMI - #{pagina}
+        title SIGCMI | #{pagina}
 
+        link(rel="stylesheet" href="/css/tailwind.css")
         link(rel="stylesheet" href="/css/admin.css")
 
-    body
+        link(rel="preconnect" href="https://fonts.googleapis.com")
+        link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+        link(href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet")
 
-        .contenedor
+    body(class="bg-slate-100")
 
+        .layout
+
+            // Sidebar
             aside.sidebar
 
-                h2 SIGCMI
+                .logo
 
-                nav
+                    h1 SIGCMI
 
-                    a(href="/dashboard") 🏠 Dashboard
+                    p Sistema Médico
 
-                    a(href="/especialidades") 🏥 Especialidades
+                nav.menu
 
-                    a(href="/medicos") 👨‍⚕️ Médicos
+                    a.menu-link(href="/dashboard")
+                        span.icon 🏠
+                        span Dashboard
 
-                    a(href="/pacientes") 👥 Pacientes
+                    a.menu-link(href="/usuarios")
+                        span.icon 👤
+                        span Usuarios
 
-                    a(href="/citas") 📅 Citas
+                    a.menu-link(href="/pacientes")
+                        span.icon ❤️
+                        span Pacientes
 
-                    a(href="/horarios") 🕒 Horarios
+                    a.menu-link(href="/medicos")
+                        span.icon 👨‍⚕️
+                        span Médicos
 
-                    a(href="/usuarios") 👤 Usuarios
+                    a.menu-link(href="/especialidades")
+                        span.icon 🏥
+                        span Especialidades
 
-                    a(href="/logout") 🚪 Cerrar sesión
+                    a.menu-link(href="/citas")
+                        span.icon 📅
+                        span Citas
 
-            main.contenido
+                    a.menu-link(href="/horarios")
+                        span.icon 🕒
+                        span Horarios
 
-                block contenido
+                    a.menu-link(href="/logout")
+                        span.icon 🚪
+                        span Cerrar sesión
+
+            // Contenido
+            .principal
+
+                header.topbar
+
+                    .titulo
+
+                        h2= pagina
+
+                    .usuario
+
+                        .avatar
+                            | 👤
+
+                        .info
+
+                            strong= usuario.nombres
+
+                            small Administrador
+
+                main.contenido
+
+                    block contenido

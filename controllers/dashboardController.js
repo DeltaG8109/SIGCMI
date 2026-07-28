@@ -1,8 +1,8 @@
-// Importamos los modelos
 import Usuario from '../models/Usuario.js'
 import Medico from '../models/Medico.js'
 import Paciente from '../models/Paciente.js'
 import Cita from '../models/Cita.js'
+import EstadoCita from '../models/EstadoCita.js'
 
 const dashboard = async (req, res) => {
 
@@ -11,14 +11,87 @@ const dashboard = async (req, res) => {
     const totalPacientes = await Paciente.count()
     const totalCitas = await Cita.count()
 
-    res.render('admin/dashboard', {
-        pagina: 'Dashboard',
-        usuario: req.usuario,
-        totalUsuarios,
-        totalMedicos,
-        totalPacientes,
-        totalCitas
+    const citasPendientes = await Cita.count({
+        where: {
+            estado_id: 1
+        }
     })
+
+    const citasCompletadas = await Cita.count({
+        where: {
+            estado_id: 2
+        }
+    })
+
+    const citasCanceladas = await Cita.count({
+        where: {
+            estado_id: 4
+        }
+    })
+
+    const ultimasCitas = await Cita.findAll({
+
+        include: [
+
+            {
+                model: Paciente,
+                as: 'paciente',
+                include: [
+                    {
+                        model: Usuario,
+                        as: 'usuario'
+                    }
+                ]
+            },
+
+            {
+                model: Medico,
+                as: 'medico',
+                include: [
+                    {
+                        model: Usuario,
+                        as: 'usuario'
+                    }
+                ]
+            },
+
+            {
+                model: EstadoCita,
+                as: 'estado'
+            }
+
+        ],
+
+        order: [['id_cita', 'DESC']],
+
+        limit: 5
+
+    })
+
+    res.render('admin/dashboard', {
+
+        pagina: 'Dashboard',
+
+        usuario: req.usuario,
+
+        totalUsuarios,
+
+        totalMedicos,
+
+        totalPacientes,
+
+        totalCitas,
+
+        citasPendientes,
+
+        citasCompletadas,
+
+        citasCanceladas,
+
+        ultimasCitas
+
+    })
+
 }
 
 export {

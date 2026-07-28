@@ -2,32 +2,121 @@ extends ../layout/admin
 
 block contenido
 
-    h1 Dashboard
+    .flex.justify-between.items-center.mb-8
+        div
+            h1(class="text-4xl font-bold text-gray-800") Dashboard
+            p(class="text-gray-500 mt-2")
+                | Bienvenido,
+                strong(class="text-blue-600") #{usuario.nombres}
 
-    h2 Bienvenido #{usuario.nombres}
+    //==============================
+    // RESUMEN GENERAL
+    //==============================
 
-    .cards
+    div(class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10")
 
-        .card
+        div(class="bg-blue-600 text-white rounded-xl shadow-lg p-6")
+            h3(class="text-lg font-semibold") Usuarios
+            h1(class="text-5xl font-bold mt-3")= totalUsuarios
 
-            h3 Usuarios
+        div(class="bg-green-600 text-white rounded-xl shadow-lg p-6")
+            h3(class="text-lg font-semibold") Médicos
+            h1(class="text-5xl font-bold mt-3")= totalMedicos
 
-            h1= totalUsuarios
+        div(class="bg-purple-600 text-white rounded-xl shadow-lg p-6")
+            h3(class="text-lg font-semibold") Pacientes
+            h1(class="text-5xl font-bold mt-3")= totalPacientes
 
-        .card
+        div(class="bg-orange-500 text-white rounded-xl shadow-lg p-6")
+            h3(class="text-lg font-semibold") Citas
+            h1(class="text-5xl font-bold mt-3")= totalCitas
 
-            h3 Médicos
 
-            h1= totalMedicos
+    //==============================
+    // ESTADO DE CITAS
+    //==============================
 
-        .card
+    h2(class="text-2xl font-bold mb-5") Estado de las Citas
 
-            h3 Pacientes
+    div(class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10")
 
-            h1= totalPacientes
+        div(class="bg-yellow-100 rounded-xl shadow p-6 text-center")
+            h3(class="text-yellow-800 font-semibold text-lg") Pendientes
+            p(class="text-5xl font-bold text-yellow-600 mt-3")= citasPendientes
 
-        .card
+        div(class="bg-green-100 rounded-xl shadow p-6 text-center")
+            h3(class="text-green-800 font-semibold text-lg") Completadas
+            p(class="text-5xl font-bold text-green-600 mt-3")= citasCompletadas
 
-            h3 Citas
+        div(class="bg-red-100 rounded-xl shadow p-6 text-center")
+            h3(class="text-red-800 font-semibold text-lg") Canceladas
+            p(class="text-5xl font-bold text-red-600 mt-3")= citasCanceladas
 
-            h1= totalCitas
+
+    //==============================
+    // ÚLTIMAS CITAS
+    //==============================
+
+    h2(class="text-2xl font-bold mb-5") Últimas Citas Registradas
+
+    div(class="bg-white rounded-xl shadow-lg overflow-hidden")
+
+        table(class="w-full")
+
+            thead(class="bg-blue-600 text-white")
+
+                tr
+
+                    th(class="px-6 py-4 text-left") Paciente
+
+                    th(class="px-6 py-4 text-left") Médico
+
+                    th(class="px-6 py-4 text-center") Estado
+
+                    th(class="px-6 py-4 text-center") Hora
+
+            tbody
+
+                if ultimasCitas.length
+
+                    each cita in ultimasCitas
+
+                        tr(class="border-b hover:bg-gray-100")
+
+                            td(class="px-6 py-4")
+                                strong= cita.paciente.usuario.nombres + ' ' + cita.paciente.usuario.apellidos
+
+                            td(class="px-6 py-4")
+                                = cita.medico.usuario.nombres + ' ' + cita.medico.usuario.apellidos
+
+                            td(class="px-6 py-4 text-center")
+
+                                if cita.estado.nombre === 'Pendiente'
+
+                                    span(class="bg-yellow-200 text-yellow-900 px-4 py-1 rounded-full font-semibold")
+                                        = cita.estado.nombre
+
+                                else if cita.estado.nombre === 'Completada'
+
+                                    span(class="bg-green-200 text-green-900 px-4 py-1 rounded-full font-semibold")
+                                        = cita.estado.nombre
+
+                                else if cita.estado.nombre === 'Cancelada'
+
+                                    span(class="bg-red-200 text-red-900 px-4 py-1 rounded-full font-semibold")
+                                        = cita.estado.nombre
+
+                                else
+
+                                    span(class="bg-gray-200 text-gray-800 px-4 py-1 rounded-full")
+                                        = cita.estado.nombre
+
+                            td(class="px-6 py-4 text-center")
+                                = cita.hora
+
+                else
+
+                    tr
+
+                        td(colspan="4" class="text-center py-8 text-gray-500")
+                            | No hay citas registradas.

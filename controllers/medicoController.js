@@ -92,6 +92,42 @@ const guardarMedico = async (req, res) => {
 
     } = req.body
 
+    const existeMedico = await Medico.findOne({
+
+        where: {
+            usuario_id
+        }
+
+    })
+
+    if (existeMedico) {
+
+        return res.send('Ese usuario ya está registrado como médico')
+
+    }
+
+    const existeCedula = await Medico.findOne({
+
+        where: {
+
+            cedula_profesional: req.body.cedula_profesional,
+
+            id_medico: {
+
+                [Op.ne]: id
+
+            }
+
+        }
+
+    })
+
+    if (existeCedula) {
+
+        return res.send('La cédula profesional ya existe')
+
+    }
+
     await Medico.create({
 
         usuario_id,
@@ -178,7 +214,7 @@ export {
     listarMedicos,
     formularioNuevoMedico,
     guardarMedico,
-    formularioEditarMedico ,
+    formularioEditarMedico,
     editarMedico,
     eliminarMedico
 }

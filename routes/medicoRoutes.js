@@ -2,7 +2,8 @@ import express from 'express'
 
 import protegerRuta from '../middleware/protegerRuta.js'
 
-import { listarMedicos,
+import {
+    listarMedicos,
     formularioNuevoMedico,
     guardarMedico,
     formularioEditarMedico,

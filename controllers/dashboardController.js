@@ -109,11 +109,58 @@ const dashboard = async (req, res) => {
 
         fechaActual,
 
-        datosGraficoBarras
+        datosGraficoBarras,
+
+        citasHoy,
+
+        proximaCita
 
     })
 
 }
+
+const hoy = new Date()
+
+const fechaHoy = hoy.toISOString().split("T")[0]
+
+const citasHoy = await Cita.count({
+    where: {
+        fecha: fechaHoy
+    }
+})
+
+const proximaCita = await Cita.findOne({
+    where: {
+        fecha:{
+            [Op.gte]: fechaHoy
+        }
+    },
+
+    include: [
+        {
+            model: Paciente,
+            as: 'paciente',
+            include: [{
+                model: Usuario,
+                as: 'usuario'
+            }]
+        },
+
+        {
+            model: Medico,
+            as: 'medico',
+            include:[{
+                model: Usuario,
+                as: 'usuario'
+            }]
+        }
+    ],
+
+    order:[
+        ['fecha', 'ASC'],
+        ['hora','ASC']
+    ]
+})
 
 export {
     dashboard

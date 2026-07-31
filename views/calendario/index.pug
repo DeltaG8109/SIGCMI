@@ -1,0 +1,35 @@
+extends ../layout/admin
+
+block contenido
+
+    <head>
+        link(
+        rel="stylesheet",
+        
+        ..href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.css")
+    </head>
+    h1(class="text-4xl font-bold mb-6")
+        | 📅 Calendario de Citas
+
+    div(class="bg-white rounded-2xl shadow-xl p-6")
+
+        div(id="calendar")
+
+    script.
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const calendarEl = document.getElementById('calendar');
+
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+
+                initialView: 'dayGridMonth',
+
+                locale: 'es',
+
+                events: '/calendario/eventos'
+
+            });
+
+            calendar.render();
+
+        });

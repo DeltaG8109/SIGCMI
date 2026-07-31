@@ -14,6 +14,7 @@ import usuarioRoutes from './routes/usuarioRoutes.js'
 import diagnosticoRoutes from './routes/diagnosticoRoutes.js'
 import prescripcionRoutes  from './routes/prescripcionRoutes.js'
 import historialRoutes from './routes/historialRoutes.js'
+import calendarioRoutes from './routes/calendarioRoutes.js'
 
 
 const app = express()
@@ -70,4 +71,6 @@ app.use('/historial', historialRoutes)
 
 app.use(express.static(path.join(__dirname, 'public')))
 
+//Ruta de calendario
+app.use('/calendario', calendarioRoutes)
 export default app

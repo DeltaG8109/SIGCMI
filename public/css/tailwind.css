@@ -328,8 +328,14 @@
   .bg-green-200 {
     background-color: var(--color-green-200);
   }
+  .bg-green-600 {
+    background-color: var(--color-green-600);
+  }
   .bg-indigo-600 {
     background-color: var(--color-indigo-600);
+  }
+  .bg-purple-600 {
+    background-color: var(--color-purple-600);
   }
   .bg-red-100 {
     background-color: var(--color-red-100);
@@ -539,6 +545,9 @@
     }
     .hover\:bg-blue-600:hover {
       background-color: var(--color-blue-600);
+    }
+    .hover\:bg-cyan-600:hover {
+      background-color: var(--color-cyan-600);
     }
     .hover\:bg-green-600:hover {
       background-color: var(--color-green-600);

@@ -33,11 +33,21 @@ export const obtenerEventos = async (req, res) => {
 
     const eventos = citas.map(cita => ({
 
-        id: cita.id,
+        id: cita.id_cita,
 
-        title: cita.paciente.usuario.nombres,
+        title:
+            `${cita.hora.substring(0, 5)} - ${cita.paciente.usuario.nombres} ${cita.paciente.usuario.apellidos}`,
 
-        start: `${cita.fecha}T${cita.hora}`
+        start: `${cita.fecha}T${cita.hora}`,
+
+        extendedProps: {
+
+            paciente:
+                `${cita.paciente.usuario.nombres} ${cita.paciente.usuario.apellidos}`,
+
+            estado: cita.estado_id
+
+        }
 
     }))
 

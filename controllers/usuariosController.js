@@ -173,8 +173,9 @@ const obtenerUsuarios = async (req, res) => {
             include: [
                 {
                     model: Rol,
+                    as: 'rol',
                     attributes: ['nombre']
-                },
+                }, ,
                 {
                     model: Paciente,
                     as: 'paciente'
@@ -216,6 +217,7 @@ const obtenerUsuario = async (req, res) => {
             include: [
                 {
                     model: Rol,
+                    as: 'rol',
                     attributes: ['nombre']
                 }
             ],

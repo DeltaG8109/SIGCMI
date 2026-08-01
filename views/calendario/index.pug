@@ -2,12 +2,6 @@ extends ../layout/admin
 
 block contenido
 
-    <head>
-        link(
-        rel="stylesheet",
-        
-        ..href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.css")
-    </head>
     h1(class="text-4xl font-bold mb-6")
         | 📅 Calendario de Citas
 
@@ -16,6 +10,7 @@ block contenido
         div(id="calendar")
 
     script.
+
         document.addEventListener('DOMContentLoaded', function () {
 
             const calendarEl = document.getElementById('calendar');
